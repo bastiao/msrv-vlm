@@ -41,7 +41,7 @@ docker run -p 5000:5000 msrv-llm:0.0.1
 2. Expose the deployment as a service:
 
     ```sh
-    kubectl expose deployment dicoogle-llm --type=LoadBalancer --port=5000
+    kubectl expose deployment msrv-vlm --type=LoadBalancer --port=5000
     ```
 
 3. Get the external IP address of the service:
@@ -51,3 +51,11 @@ docker run -p 5000:5000 msrv-llm:0.0.1
     ```
 
 4. Access the application using the external IP address and port 5000.
+
+## Example Usage
+
+To use the client to upload an image and a prompt, run the following command:
+
+```sh
+python client.py icd1.png "is this radiology? return in json"
+```

@@ -24,6 +24,8 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+DEFAULT_PROMPT = "This is an imaging from digital pathology. Tell me what are the organ and staining type. Return in JSON Format"
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
@@ -39,8 +41,8 @@ def upload_file():
         print("File saved as", filename)  
         try:
             print("Analyzing image...")
-            
-            result = analyze_image(filename)
+            prompt = request.form.get('prompt', DEFAULT_PROMPT)
+            result = analyze_image(filename, prompt)
             return jsonify(result)
         except Exception as e:
             return jsonify({'error': str(e)})
@@ -51,9 +53,8 @@ def upload_file():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'jpg', 'jpeg', 'png'}
 
-def analyze_image(image_path):
+def analyze_image(image_path, prompt):
     try:
-        prompt = "This is an imaging from digital pathology. Tell me what are the organ and staining type. Return in JSON Format"
         result = analyzer.generate_text_with_image(prompt, image_path)
         return result
     except Exception as e:
