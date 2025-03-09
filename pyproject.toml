@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "msrv-vlm"
+version = "0.1.0"
+description = ""
+authors = ["Luís Bastião Silva <bastiao@bmd-software.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = "^3.1.0"
+pillow = "^11.1.0"
+google-generativeai = "^0.8.4"
+dotenv = "^0.9.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

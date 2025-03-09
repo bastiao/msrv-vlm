@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msrv-vlm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: msrv-vlm
+  template:
+    metadata:
+      labels:
+        app: msrv-vlm
+    spec:
+      dnsPolicy: Default
+      containers:
+      - name: msrv-vlm
+        image: msrv-llm:0.0.1
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: msrv-vlm
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    app: msrv-vlm

@@ -1,0 +1,11 @@
+uploads
+_uploads
+.env
+__py_cache__
+*.pyc
+*.pyo
+*.pyd
+
+run.bat
+icd1.png
+

@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  vlm_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: msrv-llm:0.0.1
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    command: ["poetry", "run", "gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
