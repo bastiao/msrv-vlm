@@ -16,7 +16,7 @@ Currently we only support Gemini and inputs as PNG.
 To build the Docker image, run the following command in the project root directory:
 
 ```sh
-docker build  --no-cache -t msrv-llm:0.0.1 .
+docker build  --no-cache -t bastiao/msrv-llm:0.0.1 .
 ```
 
 ## Running the Application with Docker
@@ -24,7 +24,7 @@ docker build  --no-cache -t msrv-llm:0.0.1 .
 To run the application using Docker, use the following command:
 
 ```sh
-docker run -p 5000:5000 msrv-llm:0.0.1
+docker run -p 5000:5000 bastiao/msrv-llm:0.0.1
 ```
 
 ## Deploying the Application with Kubernetes

@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: msrv-llm:0.0.1
+    image: bastiao/msrv-llm:0.0.1
     ports:
       - "5000:5000"
     volumes:

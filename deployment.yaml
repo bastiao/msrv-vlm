@@ -15,7 +15,7 @@ spec:
       dnsPolicy: Default
       containers:
       - name: msrv-vlm
-        image: msrv-llm:0.0.1
+        image: bastiao/msrv-llm:0.0.1
         ports:
         - containerPort: 5000
 ---
