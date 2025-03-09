@@ -25,11 +25,11 @@ class VLMApp:
 
     def upload_file(self):
         if 'file' not in request.files:
-            return jsonify({'error': 'No file part'})
+            return jsonify({'error': 'No file part'}), 400
         file = request.files['file']
         
         if file.filename == '':
-            return jsonify({'error': 'No selected file'})
+            return jsonify({'error': 'No selected file'}), 400
         if file and self.allowed_file(file.filename):
             filename = os.path.join(self.app.config['UPLOAD_FOLDER'], file.filename)
             file.save(filename)
@@ -39,12 +39,14 @@ class VLMApp:
                 print("Analyzing image...")
                 prompt = request.form.get('prompt', self.DEFAULT_PROMPT)
                 result = self.analyze_image(filename, prompt)
-                return jsonify(result)
+                response = jsonify(result)
+                response.headers['Content-Type'] = 'application/json'
+                return response
             except Exception as e:
-                return jsonify({'error': str(e)})
+                return jsonify({'error': str(e)}), 500
 
         else:
-            return jsonify({'error': 'Invalid file type. Only JPEG allowed.'})
+            return jsonify({'error': 'Invalid file type. Only JPEG allowed.'}), 400
 
     def allowed_file(self, filename):
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'jpg', 'jpeg', 'png'}
