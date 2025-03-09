@@ -38,7 +38,8 @@ class VLMApp:
             try:
                 print("Analyzing image...")
                 prompt = request.form.get('prompt', self.DEFAULT_PROMPT)
-                result = self.analyze_image(filename, prompt)
+                return_format = request.form.get('return_format', 'json')
+                result = self.analyze_image(filename, prompt, return_format)
                 response = jsonify(result)
                 response.headers['Content-Type'] = 'application/json'
                 return response
@@ -51,9 +52,9 @@ class VLMApp:
     def allowed_file(self, filename):
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'jpg', 'jpeg', 'png'}
 
-    def analyze_image(self, image_path, prompt):
+    def analyze_image(self, image_path, prompt, return_format):
         try:
-            result = self.analyzer.generate_text_with_image(prompt, image_path)
+            result = self.analyzer.generate_text_with_image(prompt, image_path, return_format)
             return result
         except Exception as e:
             raise Exception(f"Error analyzing image: {e}")

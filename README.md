@@ -57,5 +57,33 @@ docker run -p 5000:5000 msrv-llm:0.0.1
 To use the client to upload an image and a prompt, run the following command:
 
 ```sh
-python client.py icd1.png "is this radiology? return in json"
+python client.py icd1.png "is this radiology?" json 
+```
+
+Return will be likely : 
+
+```json
+{
+    "answer": "no"
+}
+```
+
+Example of JSON-LD:
+
+```sh
+python client.py icd1.png "is this radiology?" json-ld 
+```
+
+Return will be likely : 
+
+```json-ld
+{
+    "@context": "http://schema.org",
+    "@type": "ImageObject",
+    "content": {s
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        "caption": "This is a histology image, not a radiology image."
+    }
+}
 ```

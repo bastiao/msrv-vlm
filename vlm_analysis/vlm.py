@@ -19,7 +19,7 @@ class VLMAnalyzer:
             "data": encoded_image
         }
 
-        response = self.model.generate_content([prompt, image_part])
+        response = self.model.generate_content([prompt + "\nReturn this in " + return_format, image_part])
         
         if return_format.lower() == "json":
             return self.convert_to_json(response.text)
